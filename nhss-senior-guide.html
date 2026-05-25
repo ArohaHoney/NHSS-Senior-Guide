@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NHSS Senior Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --navy-mid: #1a2f5e;
+    --blue: #2252cc;
+    --blue-light: #3d6ee8;
+    --gold: #e8a020;
+    --gold-light: #f5c355;
+    --cream: #faf8f3;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --muted: #5a6080;
+    --border: #e2e6f0;
+    --green: #1a7a4a;
+    --green-bg: #e8f5ee;
+    --red: #c0392b;
+    --red-bg: #fdecea;
+    --amber: #b36a00;
+    --amber-bg: #fff3dc;
+    --purple: #5b3fa6;
+    --purple-bg: #f0ebff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--gold);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo span.badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.08);
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 80px 2rem 90px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(34,82,204,0.35) 0%, transparent 65%),
+                radial-gradient(ellipse at 20% 80%, rgba(232,160,32,0.15) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .hero h1 em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+  .hero p {
+    max-width: 600px;
+    margin: 0 auto 2.2rem;
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: white;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.7rem 1.6rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    transition: border-color 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.07); }
+
+  /* ── STRESS BANNER ── */
+  .stress-banner {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d1f4e 100%);
+    color: white;
+    padding: 60px 2rem;
+  }
+  .stress-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .stress-banner h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    margin-bottom: 1rem;
+    color: var(--gold-light);
+  }
+  .stress-banner p {
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+  }
+  .warning-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 1.5rem;
+  }
+  .warning-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 1.2rem 1.4rem;
+  }
+  .warning-card .icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .warning-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--gold-light); margin-bottom: 0.3rem; }
+  .warning-card p { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+  /* ── SECTIONS ── */
+  section { padding: 70px 2rem; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── OUAC SECTION ── */
+  #ouac { background: var(--white); }
+  .ouac-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 2rem;
+  }
+  .info-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+  }
+  .info-card.full { grid-column: 1 / -1; }
+  .info-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card h3 .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .info-card p, .info-card li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .info-card ul { padding-left: 1.2rem; }
+  .info-card li { margin-bottom: 0.3rem; }
+
+  .alert {
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    font-size: 0.88rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert-red { background: var(--red-bg); color: var(--red); border-left: 4px solid var(--red); }
+  .alert-amber { background: var(--amber-bg); color: var(--amber); border-left: 4px solid var(--gold); }
+  .alert-green { background: var(--green-bg); color: var(--green); border-left: 4px solid var(--green); }
+  .alert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 1.2rem 0;
+  }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 1rem;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step);
+    background: var(--navy);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .steps li span { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+  .steps li strong { color: var(--text); }
+
+  /* Fee table */
+  .fee-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 1rem 0;
+  }
+  .fee-table th {
+    background: var(--navy);
+    color: white;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 500;
+  }
+  .fee-table td {
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .fee-table tr:last-child td { border-bottom: none; }
+  .fee-table tr:nth-child(even) td { background: var(--cream); }
+
+  /* ── PORTALS TAB ── */
+  #portals { background: var(--cream); }
+  .tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .tab-btn {
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .tab-btn.active {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+  }
+  .portal-content { display: none; }
+  .portal-content.active { display: block; }
+  .portal-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+  }
+  .portal-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .portal-card .portal-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .portal-step-group { margin-bottom: 1.5rem; }
+  .portal-step-group h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.6rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 10px;
+  }
+  .portal-step-group ul {
+    list-style: none;
+    padding: 0;
+  }
+  .portal-step-group ul li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding: 4px 0 4px 1.2rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .portal-step-group ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--blue);
+    font-size: 0.8rem;
+  }
+  .portal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--navy);
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+  }
+  .portal-link:hover { background: var(--blue); }
+
+  /* ── COURSES ── */
+  #courses { background: var(--white); }
+  .course-disclaimer {
+    background: var(--amber-bg);
+    border: 1px solid #f5c355;
+    border-radius: 12px;
+    padding: 1rem 1.3rem;
+    font-size: 0.87rem;
+    color: var(--amber);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .course-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .course-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(13,27,62,0.1);
+  }
+  .course-card-header {
+    padding: 1.2rem 1.4rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .course-code {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 3px;
+  }
+  .course-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .difficulty-badge {
+    flex-shrink: 0;
+    background: var(--navy);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .difficulty-badge.hard { background: #c0392b; }
+  .difficulty-badge.medium { background: #b36a00; }
+  .difficulty-badge.easy { background: #1a7a4a; }
+  .course-card-body { padding: 1.2rem 1.4rem; }
+  .course-card-body p {
+    font-size: 0.87rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    line-height: 1.55;
+  }
+  .stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1rem;
+  }
+  .star { font-size: 0.85rem; }
+  .star.filled { color: var(--gold); }
+  .star.empty { color: #d0d4e0; }
+  .tip-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--blue);
+    margin-bottom: 0.4rem;
+  }
+  .tips-list {
+    list-style: none;
+    padding: 0;
+  }
+  .tips-list li {
+    font-size: 0.83rem;
+    color: var(--muted);
+    padding: 3px 0 3px 1.1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .tips-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .expand-btn {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--blue);
+    font-size: 0.82rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: background 0.2s;
+  }
+  .expand-btn:hover { background: var(--border); }
+  .course-extra { display: none; margin-top: 0.8rem; }
+  .course-extra.open { display: block; }
+
+  /* ── SCHOLARSHIPS ── */
+  #scholarships { background: var(--cream); }
+  .scholarship-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .scholarship-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .scholarship-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(13,27,62,0.1);
+  }
+  .scholarship-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+  .scholarship-card.purple::before { background: var(--purple); }
+  .scholarship-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
+  }
+  .scholarship-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .scholarship-tag {
+    display: inline-block;
+    background: var(--purple-bg);
+    color: var(--purple);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .scholarship-tag.gold { background: var(--amber-bg); color: var(--amber); }
+  .req-row {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 0.45rem;
+  }
+  .req-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+  .req-text { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+  .deadline-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--red-bg);
+    color: var(--red);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: 1rem;
+  }
+  .scholarship-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    background: var(--navy);
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.55rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .scholarship-link:hover { background: var(--blue); }
+
+  /* ── RESOURCES ── */
+  #resources { background: var(--white); }
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .resource-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.3rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: block;
+  }
+  .resource-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(13,27,62,0.09);
+    border-color: var(--blue);
+  }
+  .resource-icon { font-size: 1.3rem; margin-bottom: 0.6rem; }
+  .resource-title { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 0.3rem; }
+  .resource-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+  .resource-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: var(--navy);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-top: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── INSTAGRAM CTA ── */
+  .instagram-cta {
+    background: linear-gradient(135deg, #405DE6, #833AB4, #C13584, #E1306C);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem 2.2rem;
+    text-align: center;
+    margin-top: 3rem;
+  }
+  .instagram-cta h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .instagram-cta p { color: rgba(255,255,255,0.82); font-size: 0.9rem; margin-bottom: 1.2rem; }
+  .insta-btn {
+    background: white;
+    color: #C13584;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .insta-btn:hover { opacity: 0.9; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2.5rem 2rem;
+    font-size: 0.82rem;
+    border-top: 3px solid var(--gold);
+  }
+  footer strong { color: white; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.open {
+      display: flex;
+      position: absolute;
+      top: 64px;
+      left: 0; right: 0;
+      background: var(--navy);
+      padding: 1rem 2rem;
+      border-bottom: 2px solid var(--gold);
+    }
+    .hamburger { display: flex; }
+    nav { position: relative; }
+    .ouac-grid { grid-template-columns: 1fr; }
+    .ouac-grid .info-card.full { grid-column: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      NHSS Senior Guide
+      <span class="badge">2026</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#ouac">OUAC</a></li>
+      <li><a href="#portals">Portals</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#scholarships">Scholarships</a></li>
+      <li><a href="#resources">Resources</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Northview Heights Secondary School</p>
+  <h1>Grade 12 doesn't have to<br><em>catch you off guard.</em></h1>
+  <p>Real advice from NHSS seniors who've been through it — everything from OUAC applications to course tips to scholarships.</p>
+  <div class="hero-ctas">
+    <a href="#ouac" class="btn-primary">Start with OUAC →</a>
+    <a href="#courses" class="btn-ghost">View Course Guide</a>
+  </div>
+</div>
+
+<!-- STRESS BANNER -->
+<div class="stress-banner">
+  <div class="stress-inner">
+    <h2>Grade 12 can get overwhelming — fast.</h2>
+    <p>Most students don't realize how much is happening at once: university applications, supplementary forms, scholarship deadlines, final marks, AND keeping up with the hardest courses of your life. This guide exists so you don't have to figure it out alone.</p>
+    <div class="warning-cards">
+      <div class="warning-card">
+        <div class="icon">⏰</div>
+        <h4>Procrastination kills</h4>
+        <p>OUAC closes January 15. Scholarship portals close even earlier. Miss a deadline and there's no appeal.</p>
+      </div>
+      <div class="warning-card">
+        <div class="icon">😵</div>
+        <h4>Information overload</h4>
+        <p>Every university has a different portal, different documents, different deadlines. It's a lot — but it's manageable with a plan.</p>
+      </div>
+      <div class="warning-card">
+        <div class="icon">🗣️</div>
+        <h4>Random friend advice</h4>
+        <p>Your friends are figuring it out too. Rely on people who've actually done it — that's us.</p>
+      </div>
+      <div class="warning-card">
+        <div class="icon">📚</div>
+        <h4>Underestimating courses</h4>
+        <p>Grade 12 courses hit differently. ENG4U, Chem, Bio, Physics — know what you're signing up for.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OUAC SECTION -->
+<section id="ouac">
+  <div class="section-inner">
+    <p class="section-label">Step 1 — University Applications</p>
+    <h2 class="section-title">Applying Through OUAC</h2>
+    <p class="section-sub">The Ontario Universities' Application Centre is how you apply to every Ontario university. Here's everything you need to know.</p>
+
+    <div class="alert alert-amber">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Use your personal email only.</strong> Your school account will be deactivated shortly after graduation. Create a Gmail if you don't have one. All university communications will go to this address.</div>
+    </div>
+
+    <div class="ouac-grid">
+      <div class="info-card">
+        <h3><span class="dot"></span>What is OUAC?</h3>
+        <p>OUAC is the centralized platform for submitting university applications across Ontario. Your guidance office automatically sends your grades — you do <strong>not</strong> submit transcripts, subapps, or extracurriculars through OUAC.</p>
+      </div>
+      <div class="info-card">
+        <h3><span class="dot"></span>Key Dates</h3>
+        <ul>
+          <li>Portal opens: <strong>Late September – Early October</strong></li>
+          <li>Deadline: <strong>January 15</strong> — last day to submit interest in a program</li>
+          <li>Universities respond: typically <strong>1–2 weeks after payment</strong></li>
+        </ul>
+      </div>
+      <div class="info-card full">
+        <h3><span class="dot"></span>How to Get Started</h3>
+        <ol class="steps">
+          <li><span>Go to <a href="https://www.ouac.on.ca" target="_blank" style="color:var(--blue)">ouac.on.ca</a> and create an account with your <strong>personal email</strong>.</span></li>
+          <li><span>Click <strong>Undergraduate</strong> after logging in.</span></li>
+          <li><span>Fill in <strong>Personal Details</strong> and <strong>My Background</strong> — double-check everything before submitting.</span></li>
+          <li><span>Go to <strong>"My Choices"</strong> tab → click <strong>Add Program</strong> to select universities. You need at least 3.</span></li>
+          <li><span>Go to <strong>Review and Payment</strong>. Green checkmarks = reviewed. Pay fees to officially submit.</span></li>
+          <li><span>Wait for confirmation emails from universities (1–2 weeks). Then access their individual portals.</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <span class="alert-icon">🚨</span>
+      <div><strong>Your application is NOT sent until fees are paid.</strong> Universities will not receive anything until payment goes through on OUAC.</div>
+    </div>
+
+    <div class="info-card" style="margin-top:0;">
+      <h3><span class="dot"></span>OUAC Program Fees</h3>
+      <table class="fee-table">
+        <thead><tr><th>Programs</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td>First 3 programs (minimum)</td><td><strong>~$150</strong></td></tr>
+          <tr><td>Each additional program</td><td><strong>+$50 each</strong></td></tr>
+          <tr><td>Programs with supplementary apps (e.g. Rotman Commerce)</td><td><strong>+$50 extra</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PORTALS SECTION -->
+<section id="portals">
+  <div class="section-inner">
+    <p class="section-label">Step 2 — After You Apply</p>
+    <h2 class="section-title">University Applicant Portals</h2>
+    <p class="section-sub">After applying through OUAC, each university will email you a student/applicant number. Use it to access their portal — but wait for that email first.</p>
+
+    <div class="alert alert-green">
+      <span class="alert-icon">✅</span>
+      <div><strong>Wait for the email before trying to access any portal.</strong> If you haven't received anything after 2 weeks, contact the university's admissions office directly.</div>
+    </div>
+
+    <div class="tab-bar" id="tabBar">
+      <button class="tab-btn active" onclick="showPortal('uoft', this)">U of T</button>
+      <button class="tab-btn" onclick="showPortal('york', this)">York</button>
+      <button class="tab-btn" onclick="showPortal('tmu', this)">TMU</button>
+      <button class="tab-btn" onclick="showPortal('mcmaster', this)">McMaster</button>
+      <button class="tab-btn" onclick="showPortal('waterloo', this)">Waterloo</button>
+      <button class="tab-btn" onclick="showPortal('queens', this)">Queen's</button>
+      <button class="tab-btn" onclick="showPortal('western', this)">Western</button>
+    </div>
+
+    <!-- U of T -->
+    <div class="portal-content active" id="portal-uoft">
+      <div class="portal-card">
+        <h3>University of Toronto</h3>
+        <p class="portal-sub">Portal: <strong>JOIN U of T</strong> — used to track your application, upload documents, and receive decisions.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Activate Your JOINid</h4>
+          <ul>
+            <li>Go to the official JOIN U of T Portal and select "Enable your JOINid"</li>
+            <li>You'll need your Applicant Number, date of birth, and the email used on your application</li>
+            <li>Create your password and security information once activated</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Log In & Monitor</h4>
+          <ul>
+            <li>Log in using your JOINid credentials (usually emailed a few days after applying)</li>
+            <li>Check application status, view supplementary requirements, and receive admission decisions</li>
+            <li>Access scholarship and residence information through the portal</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Upload Documents (if required)</h4>
+          <ul>
+            <li>Transcripts, English proficiency scores, supplementary applications or profiles</li>
+            <li>Ontario high school students have grades sent automatically via OUAC</li>
+          </ul>
+        </div>
+        <a href="https://join.utoronto.ca" target="_blank" class="portal-link">Open JOIN U of T Portal ↗</a>
+      </div>
+    </div>
+
+    <!-- York -->
+    <div class="portal-content" id="portal-york">
+      <div class="portal-card">
+        <h3>York University</h3>
+        <p class="portal-sub">Portal: <strong>MyFile</strong> — your hub for tracking status, uploading documents, and supplementary apps.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Access MyFile</h4>
+          <ul>
+            <li>Go to York's official MyFile portal</li>
+            <li>Log in with your York Student Number and date of birth or temporary password</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Monitor Your Application</h4>
+          <ul>
+            <li>Track application status and admission decisions</li>
+            <li>Submit supplementary applications if required</li>
+            <li>Check scholarship information</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Upload Documents (if required)</h4>
+          <ul>
+            <li>Transcripts, supplementary applications, portfolios, English language test results</li>
+            <li>All uploads go directly through MyFile</li>
+          </ul>
+        </div>
+        <a href="https://myfile.yorku.ca" target="_blank" class="portal-link">Open York MyFile ↗</a>
+      </div>
+    </div>
+
+    <!-- TMU -->
+    <div class="portal-content" id="portal-tmu">
+      <div class="portal-card">
+        <h3>Toronto Metropolitan University</h3>
+        <p class="portal-sub">Portal: <strong>ChooseTMU</strong> — note that activation can take up to 24 hours.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Activate Your TMU Online Identity</h4>
+          <ul>
+            <li>Go to the ChooseTMU Applicant Portal and open the activation form</li>
+            <li>Enter your 9-digit TMU Student Number and personal information</li>
+            <li>Allow up to 24 hours for activation</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Log In & Monitor</h4>
+          <ul>
+            <li>Sign in with your TMU online identity credentials</li>
+            <li>Track status, view admission letters, check English proficiency status</li>
+            <li>Read important communications from the admissions office</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Upload Documents (if required)</h4>
+          <ul>
+            <li>Transcripts, supplementary forms, portfolios or essays, English proficiency documents</li>
+          </ul>
+        </div>
+        <a href="https://www.torontomu.ca/admissions/applicants/" target="_blank" class="portal-link">Open ChooseTMU Portal ↗</a>
+      </div>
+    </div>
+
+    <!-- McMaster -->
+    <div class="portal-content" id="portal-mcmaster">
+      <div class="portal-card">
+        <h3>McMaster University</h3>
+        <p class="portal-sub">Portal: <strong>Mosaic</strong> — requires a MacID activation first.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Activate Your MacID</h4>
+          <ul>
+            <li>Go to the official McMaster applicant portal to activate your MacID</li>
+            <li>You only need to activate once — keep your credentials safe</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Log Into Mosaic</h4>
+          <ul>
+            <li>Sign in with your MacID and password</li>
+            <li>Track status, view supplementary requirements, receive admission updates and offers</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Upload Documents (if required)</h4>
+          <ul>
+            <li>Transcripts, supplementary applications, English proficiency, other supporting documents</li>
+          </ul>
+        </div>
+        <a href="https://mosaic.mcmaster.ca" target="_blank" class="portal-link">Open McMaster Mosaic ↗</a>
+      </div>
+    </div>
+
+    <!-- Waterloo -->
+    <div class="portal-content" id="portal-waterloo">
+      <div class="portal-card">
+        <h3>University of Waterloo</h3>
+        <p class="portal-sub">Portal: <strong>Quest</strong> — check it frequently, updates and tasks appear here first.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Log Into Quest</h4>
+          <ul>
+            <li>Go to Waterloo's applicant portal and select the Admissions section</li>
+            <li>View your application details and status</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Complete Required Tasks</h4>
+          <ul>
+            <li>Complete the Declaration of Academic Experience (DAE)</li>
+            <li>Submit supplementary forms like the AIF or interview requirements</li>
+            <li>Check your application checklist regularly — it's updated often</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Monitor Admission Status</h4>
+          <ul>
+            <li>Track uploaded documents and receive admission decisions</li>
+            <li>Accept your offer through Quest if admitted</li>
+          </ul>
+        </div>
+        <a href="https://quest.uwaterloo.ca" target="_blank" class="portal-link">Open Waterloo Quest ↗</a>
+      </div>
+    </div>
+
+    <!-- Queen's -->
+    <div class="portal-content" id="portal-queens">
+      <div class="portal-card">
+        <h3>Queen's University</h3>
+        <p class="portal-sub">Portal: <strong>SOLUS (MyQueen'sU)</strong> — accessed after activating your NetID.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Activate Your NetID</h4>
+          <ul>
+            <li>Go to the Queen's login page and follow instructions to activate with your student number</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Log Into SOLUS</h4>
+          <ul>
+            <li>Log in and track application status, view decisions, accept your offer if admitted</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Upload Documents (if required)</h4>
+          <ul>
+            <li>Transcripts, supplementary applications, English test results, additional forms</li>
+            <li>Submitted or tracked through SOLUS or linked Queen's systems</li>
+          </ul>
+        </div>
+        <a href="https://sass.queensu.ca/solus" target="_blank" class="portal-link">Open Queen's SOLUS ↗</a>
+      </div>
+    </div>
+
+    <!-- Western -->
+    <div class="portal-content" id="portal-western">
+      <div class="portal-card">
+        <h3>Western University</h3>
+        <p class="portal-sub">Portal: <strong>Student Center</strong> — set up your Western Identity first.</p>
+        <div class="portal-step-group">
+          <h4>Step 1 — Activate Your Western Identity</h4>
+          <ul>
+            <li>Go to the Western login page and activate using your student number and personal details</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 2 — Log Into the Student Center Portal</h4>
+          <ul>
+            <li>Track application status, view decisions, accept your offer if admitted</li>
+          </ul>
+        </div>
+        <div class="portal-step-group">
+          <h4>Step 3 — Upload Documents (if required)</h4>
+          <ul>
+            <li>Transcripts, supplementary applications, English test results, additional forms</li>
+            <li>Required documents appear in your portal checklist</li>
+          </ul>
+        </div>
+        <a href="https://registrar.uwo.ca" target="_blank" class="portal-link">Open Western Registrar ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COURSES SECTION -->
+<section id="courses">
+  <div class="section-inner">
+    <p class="section-label">Grade 12 Courses</p>
+    <h2 class="section-title">Course Difficulty Guide</h2>
+    <p class="section-sub">Real ratings and advice from NHSS seniors. Your experience may vary depending on your teacher and strengths.</p>
+
+    <div class="course-disclaimer">
+      ⚠️ All info is based on the 2026 curriculum from our personal experience. Ratings are opinions — difficulty varies by teacher and student. For teacher-specific advice, DM us on Instagram <strong>@nhss.seniorguides</strong>.
+    </div>
+
+    <div class="course-grid">
+
+      <!-- ENG4U -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">ENG4U</div>
+            <div class="course-name">English</div>
+          </div>
+          <div class="difficulty-badge hard">4.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span>
+          </div>
+          <p>Extremely time-consuming with subjective marking. Getting above 90 is very doable — 95+ in-person is almost unheard of. Favoritism is real.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Do it in summer school or night school if possible</li>
+            <li>Ask for feedback on every assignment — teachers notice and reward it</li>
+            <li>Be active in class (not annoying)</li>
+            <li>Use Grammarly or AI for spelling/clarity checks only — don't write with AI</li>
+          </ul>
+          <button class="expand-btn" onclick="toggleExtra(this)">Show course material ▾</button>
+          <div class="course-extra">
+            <div class="tip-label" style="margin-top:0.5rem;">Course Material</div>
+            <ul class="tips-list">
+              <li>Writing quizzes and tests</li>
+              <li>Book club: 1984, Vox, Brave New World</li>
+              <li>Essay writing (multiple)</li>
+              <li>Shakespearean writing — in-class readings help</li>
+              <li>Culminating + Exam: both based on the Shakespeare book your class read</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Functions -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">MHF4U</div>
+            <div class="course-name">Advanced Functions</div>
+          </div>
+          <div class="difficulty-badge medium">3.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Builds on Grade 11 Functions. Most students find it easier than Functions. Teacher-dependent — effort matters more than raw ability.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Ask questions — no question is too dumb</li>
+            <li>Always do the test review packages they give you</li>
+            <li>Understand concepts before memorizing procedures</li>
+            <li>JensenMath & Organic Chemistry Tutor on YouTube are great but use class methods for marks</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Calculus -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">MCV4U</div>
+            <div class="course-name">Calculus & Vectors</div>
+          </div>
+          <div class="difficulty-badge medium">3.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star filled">★</span>
+            <span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Requires Advanced Functions. Many consider this the hardest math, but it's very doable with strong work ethic. Do problems until you feel confident before every test.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Advanced Functions (MHF4U) is a prerequisite</li>
+            <li>Same advice as Advanced Functions — review packages, ask questions</li>
+            <li>JensenMath is great, but stick to class methods</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Data Management -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">MDM4U</div>
+            <div class="course-name">Data Management</div>
+          </div>
+          <div class="difficulty-badge easy">2.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Easiest of the three math options. Highly recommended if your program requires any math. With decent effort, 90+ is very achievable.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Don't get cocky — still put in effort for each assessment</li>
+            <li>Consistent work ethic makes 90+ very achievable</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Chemistry -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">SCH4U</div>
+            <div class="course-name">Chemistry</div>
+          </div>
+          <div class="difficulty-badge hard">4.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span>
+          </div>
+          <p>Nothing like Grade 11 Chem — much harder. Requires conceptual understanding, not just memorization. Lots of application. Cheat sheets allowed for labs and some units.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Past tests/quizzes are extremely helpful — ask around until you get them</li>
+            <li>Ask questions in class and during tests when confused</li>
+            <li>Make friends with strong students in your class</li>
+            <li>Plickers (class quizzes) = 5% of your final grade — worth attending</li>
+            <li>NotebookLM/Gemini + Bozeman Science/Orgo Chem Tutor on YouTube</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Biology -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">SBI4U</div>
+            <div class="course-name">Biology</div>
+          </div>
+          <div class="difficulty-badge hard">4.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span>
+          </div>
+          <p>Lots of memorization and detail. Far more specific than Grade 11. You can lose marks quickly if you miss any keywords — be methodical and thorough in answers.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Prioritize understanding over memorization</li>
+            <li>Past tests/quizzes — track them down and use them</li>
+            <li>Spam keywords on short answer questions</li>
+            <li>Textbook questions take ~30 mins and help a lot — use AI for answer keys</li>
+            <li>NotebookLM/Gemini for self-quizzing; Amoeba Sisters on YouTube</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Physics -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">SPH4U</div>
+            <div class="course-name">Physics</div>
+          </div>
+          <div class="difficulty-badge hard">4.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span>
+          </div>
+          <p>Completely different from Grade 11 Physics. Requires significant time and deep understanding. Only take it if your university program requires it.</p>
+          <div class="tip-label">Key Warnings</div>
+          <ul class="tips-list">
+            <li>Not recommended if below 75% in Grade 11 Physics</li>
+            <li>Only take if required for your program</li>
+            <li>Very doable with hard work — and great prep for university physics</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Computer Science -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">ICS4U</div>
+            <div class="course-name">Computer Science</div>
+          </div>
+          <div class="difficulty-badge easy">2 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Reviewed by Kennedy Tran (UofT CS). Reuses ICS3U concepts but in Java instead of Python. If you did well in Grade 11, expect similar results here.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>The learning blog (required) is a great study resource — use it</li>
+            <li>Cheat sheets are allowed later in the course</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Computer Engineering -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">TEJ4M</div>
+            <div class="course-name">Computer Engineering</div>
+          </div>
+          <div class="difficulty-badge easy">1.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span>
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Reviewed by Kennedy Tran (UofT CS). Builds directly on Grade 11 computer engineering concepts. Straightforward if you did well in Grade 11.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Review worksheets and practice tests given in class</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Robotics -->
+      <div class="course-card">
+        <div class="course-card-header">
+          <div>
+            <div class="course-code">TER4M</div>
+            <div class="course-name">Robotics</div>
+          </div>
+          <div class="difficulty-badge easy">2.5 / 5</div>
+        </div>
+        <div class="course-card-body">
+          <div class="stars">
+            <span class="star filled">★</span><span class="star filled">★</span>
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          </div>
+          <p>Reviewed by Timothy Lin (UWaterloo Mechanical Eng). Real robotics challenges with real deadlines. Enjoyable but would benefit from more structure.</p>
+          <div class="tip-label">Top Tips</div>
+          <ul class="tips-list">
+            <li>Quizzes/tests are based on the game manual — know it</li>
+            <li>Use NotebookLM to make flashcards for rote memorization</li>
+            <li>Watch matches to understand the game better</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCHOLARSHIPS -->
+<section id="scholarships">
+  <div class="section-inner">
+    <p class="section-label">Free Money</p>
+    <h2 class="section-title">Scholarship Opportunities</h2>
+    <p class="section-sub">Apply early — most scholarship portals close well before university deadlines.</p>
+
+    <div class="scholarship-grid">
+
+      <div class="scholarship-card">
+        <div class="scholarship-amount">$100,000</div>
+        <div class="scholarship-name">Loran Scholars Foundation</div>
+        <span class="scholarship-tag gold">Character + Academics</span>
+        <div class="req-row"><span class="req-icon">📊</span><span class="req-text">Minimum 85% average</span></div>
+        <div class="req-row"><span class="req-icon">🤝</span><span class="req-text">Strong character, community service, leadership potential</span></div>
+        <div class="req-row"><span class="req-icon">📎</span><span class="req-text">Upload recent transcript or marks summary; need references from a teacher and community leader</span></div>
+        <div class="deadline-chip">⏰ Portal closes mid-October</div>
+        <a href="https://loranscholar.ca" target="_blank" class="scholarship-link">View Loran Scholars →</a>
+      </div>
+
+      <div class="scholarship-card purple">
+        <div class="scholarship-amount">Up to $120K</div>
+        <div class="scholarship-name">Schulich Leader Scholarships</div>
+        <span class="scholarship-tag">STEM Focus</span>
+        <div class="req-row"><span class="req-icon">📊</span><span class="req-text">Typically 90%+ average</span></div>
+        <div class="req-row"><span class="req-icon">🔬</span><span class="req-text">Enrolling in STEM at a partner Canadian university; entrepreneurial mindset</span></div>
+        <div class="req-row"><span class="req-icon">🏫</span><span class="req-text">Must be nominated by your high school first (one nominee per school per year). Then submit transcripts, essays, and 2 reference letters.</span></div>
+        <div class="req-row"><span class="req-icon">💰</span><span class="req-text">$120K (Engineering) or $100K (Science, Technology, Math) over 4 years</span></div>
+        <div class="deadline-chip">⏰ School nomination: late January · Student app: mid-February</div>
+        <a href="https://schulichleaders.com" target="_blank" class="scholarship-link">View Schulich Leaders →</a>
+      </div>
+
+    </div>
+
+    <div class="instagram-cta" style="margin-top:2rem;">
+      <h3>Know of other scholarships?</h3>
+      <p>We're always updating this guide. DM us on Instagram and we'll add them — or ask us anything about scholarships.</p>
+      <a href="https://instagram.com/nhss.seniorguides" target="_blank" class="insta-btn">@nhss.seniorguides</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-inner">
+    <p class="section-label">Study Tools & Links</p>
+    <h2 class="section-title">Outside Resources</h2>
+    <p class="section-sub">The best free tools used by NHSS students to survive Grade 12.</p>
+
+    <div class="resources-grid">
+      <a href="https://www.youtube.com/@jensenmath" target="_blank" class="resource-card">
+        <div class="resource-icon">📐</div>
+        <div class="resource-title">JensenMath</div>
+        <div class="resource-desc">Best YouTube channel for Advanced Functions and Calculus — explains concepts clearly and matches the Ontario curriculum.</div>
+        <span class="resource-tag">Math</span>
+      </a>
+      <a href="https://www.youtube.com/@theorganicchemistrytutor" target="_blank" class="resource-card">
+        <div class="resource-icon">🧪</div>
+        <div class="resource-title">Organic Chemistry Tutor</div>
+        <div class="resource-desc">Covers math, chemistry, physics, and biology. Great for understanding concepts quickly before a test.</div>
+        <span class="resource-tag">Science + Math</span>
+      </a>
+      <a href="https://www.youtube.com/@AmoebaSisters" target="_blank" class="resource-card">
+        <div class="resource-icon">🔬</div>
+        <div class="resource-title">Amoeba Sisters</div>
+        <div class="resource-desc">Biology-focused YouTube channel. Clear, visual explanations for all the major Grade 12 Bio units.</div>
+        <span class="resource-tag">Biology</span>
+      </a>
+      <a href="https://www.youtube.com/@bozemanscience" target="_blank" class="resource-card">
+        <div class="resource-icon">⚗️</div>
+        <div class="resource-title">Bozeman Science</div>
+        <div class="resource-desc">Exceptional for Chemistry and Biology concept videos. Pairs well with in-class learning.</div>
+        <span class="resource-tag">Chem + Bio</span>
+      </a>
+      <a href="https://notebooklm.google.com" target="_blank" class="resource-card">
+        <div class="resource-icon">🧠</div>
+        <div class="resource-title">NotebookLM</div>
+        <div class="resource-desc">Upload your notes and use AI to quiz yourself, generate flashcards, and explain concepts. Used heavily in Chem, Bio, and Robotics.</div>
+        <span class="resource-tag">AI Study Tool</span>
+      </a>
+      <a href="https://www.grammarly.com" target="_blank" class="resource-card">
+        <div class="resource-icon">✏️</div>
+        <div class="resource-title">Grammarly</div>
+        <div class="resource-desc">Check grammar, clarity, and style for ENG4U essays. Don't write with AI — but use it to polish.</div>
+        <span class="resource-tag">English</span>
+      </a>
+      <a href="https://www.ouac.on.ca" target="_blank" class="resource-card">
+        <div class="resource-icon">🎓</div>
+        <div class="resource-title">OUAC Portal</div>
+        <div class="resource-desc">The official Ontario Universities' Application Centre. Start your application here.</div>
+        <span class="resource-tag">Applications</span>
+      </a>
+      <a href="https://instagram.com/nhss.seniorguides" target="_blank" class="resource-card">
+        <div class="resource-icon">📱</div>
+        <div class="resource-title">@nhss.seniorguides</div>
+        <div class="resource-desc">Our Instagram. DM us for teacher advice, scholarship tips, or anything not covered here.</div>
+        <span class="resource-tag">NHSS Community</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>NHSS Senior Guide</strong> &nbsp;·&nbsp; Made by Northview Heights students, for Northview Heights students.</p>
+  <p style="margin-top:0.5rem;">All info based on 2026 curriculum experience. Advice may vary. Follow <strong>@nhss.seniorguides</strong> on Instagram for updates.</p>
+</footer>
+
+<script>
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+
+  // Portal tabs
+  function showPortal(id, btn) {
+    document.querySelectorAll('.portal-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('portal-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Course expand
+  function toggleExtra(btn) {
+    const extra = btn.nextElementSibling;
+    extra.classList.toggle('open');
+    btn.textContent = extra.classList.contains('open') ? 'Hide course material ▴' : 'Show course material ▾';
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        navLinks.classList.remove('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
